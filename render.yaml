@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: agentsync-api
+    runtime: python
+    plan: free
+    rootDir: apps/agentsync-api
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: AGENTSYNC_API_KEY
+        sync: false
+      - key: MOCK_NONILION
+        value: "false"
+      - key: NONILION_BASE_URL
+        sync: false
+      - key: NONILION_TOKEN
+        sync: false
+      - key: NONILION_PAIRING_CODE
+        sync: false
